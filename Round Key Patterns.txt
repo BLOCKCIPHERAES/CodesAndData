@@ -1,0 +1,77 @@
+Table1={0x25,0x29};
+
+Table2 = { 0x07,0x0b,0x0d,0x0e,0x13,0x15,0x16,0x19,0x1a,0x1c,0x23,0x25,0x26,0x29,0x2a,0x2c,0x31,0x32,0x34,0x38,0x43,0x45,0x46,0x49,0x4a,0x4c,0x51,0x52,0x54,0x58,0x61,0x62,0x64,0x68,0x70,0x83,0x85,0x86,0x89,0x8a,0x8c,0x91,0x92,0x94,0x98,0xa1,0xa2,0xa4,0xa8,0xb0,0xc1,0xc2,0xc4,0xc8,0xd0,0xe0 };
+
+The forth round key patterns:         
+1.The 0th cell takes 2 values in Table1 and the other cells are 0x00.
+2. The 5th cell takes 2 values in Table1 and the other cells are 0x00.
+3. The 10th cell takes 2 values in Table1 and the other cells are 0x00.
+4. The 15th cell takes 2 values in Table1 and the other cells are 0x00.
+
+
+The third round key patterns : 
+when the forth round key patterns are  No.1 condition, the third round key patterns are
+0x07 00 00 00
+0x00 0e 00 00
+0x00 00 0e 00
+0x00 00 00 0e.
+when the forth round key patterns are  No.2 condition, the third round key patterns are
+0x00 0e 00 00
+0x00 00 07 00
+0x00 00 00 0e
+0x0e 00 00 00.
+when the forth round key patterns are  No.3 condition, the third round key patterns are
+0x00 00 0e 00
+0x00 00 00 0e
+0xe0 00 00 00
+0x00 07 00 00
+when the forth round key patterns are  No.4 condition, the third round key patterns are 
+0x00 00 00 0e
+0x0e 00 00 00
+0x00 0e 00 00
+0x00 00 07 00
+
+
+
+
+The second round key patterns :
+when the forth round key patterns are  No.1 condition, the second round key patterns are
+0x07 00 00 00
+0x00 0e 00 00
+0x00 00 0e 00
+0x00 00 00 0e.
+when the forth round key patterns are  No.2 condition, the second round key patterns are
+0x0e 00 00 00
+0x00 0e 00 00
+0x00 00 0e 00
+0x00 00 00 07.
+when the forth round key patterns are  No.3 condition, the third round key patterns are
+0x0e 00 00 00
+0x00 0e 00 00
+0x00 00 07 00
+0x00 00 00 0e.
+when the forth round key patterns are  No.4 condition, the third round key patterns are 
+0x0e 00 00 00
+0x00 07 00 00
+0x00 00 0e 00
+0x00 00 00 0e.
+
+The first round key patterns : 
+The 0th cell takes 56 values in Table2 and the other cells are 0x00.
+The 4th cell takes 56 values in Table2 and the other cells are 0x00.
+The 8th cell takes 56 values in Table2 and the other cells are 0x00.
+The 12th cell takes 56 values in Table2 and the other cells are 0x00.
+
+The whiten round key patterns are :
+0x00 00 00 00
+0x00 00 00 00
+0x00 00 00 00
+0x00 00 00 00.
+
+There are (2*4)*1*1*(56*4)*1=1792 round key patterns in total.
+
+It only takes several hours for our program to compute all the round key patterns and  obtain the "result.txt". There are 57344 rows and 32 columns in the "result.txt" and we need to transform it to a 1792*1024 matrix.
+We just need to concatenate the following data to the first 1792 rows every 1792 rows.
+
+Finally, we obtain a 1792*1024 matrix stored in "Matrix.txt". We have checked that it is a full rank matrix.
+
